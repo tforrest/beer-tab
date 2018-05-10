@@ -1,9 +1,9 @@
-# require 'rake/testtask'
+require 'rake/testtask'
 require 'active_record'
 require 'sqlite3'
 
 namespace 'test' do
-  task :test do
+  task :unittest do
     Rake::TestTask.new do |t|
       t.libs << 'test'
       t.test_files = FileList['test/*']
