@@ -12,7 +12,7 @@ end
 
 
 namespace 'db' do
-  desc 'setup sqlite3 in-memory database'
+  desc 'setup sqlite3 database'
   task :connect_sqlite3 do
     ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'beerlite')
   end
