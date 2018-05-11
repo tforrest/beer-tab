@@ -27,9 +27,9 @@ class BeerTab
     end
 
     def ensure_tab(owes_id, owed_id)
-        Tab.find_or_create_by!(count: 0,
-                               owes: owes_id,
-                               owed: owed_id)
+      Tab.find_or_create_by!(count: 0,
+                             owes: owes_id,
+                             owed: owed_id)
     end
 
     def show_owed(owed_id)

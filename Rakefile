@@ -2,14 +2,13 @@ require 'rake/testtask'
 require 'active_record'
 require 'sqlite3'
 
-namespace 'test' do
-  task :unittest do
-    Rake::TestTask.new do |t|
-      t.libs << 'test'
-      t.test_files = FileList['test/*']
-    end
-  end
+require './models/models'
+
+Rake::TestTask.new do |t|
+  t.libs << 'test'
+  t.test_files = FileList['./lib/test_*']
 end
+
 
 
 namespace 'db' do
@@ -20,22 +19,8 @@ namespace 'db' do
 
   desc 'create database schema'
   task :create_tables do
-    ActiveRecord::Schema.define do
-      create_table :user, force: :cascade do |t|
-        t.integer 'telegram_id', :primary_key, null: false
-        t.string 'first_name'
-        t.string 'last_name'
-        t.string 'username', null: false
-      end
-    end
-    ActiveRecord::Schema.define do
-      create_table :tab do |t|
-        t.integer 'count', default: 0
-        t.integer 'owes', :primary_key, null: false, references: :user
-        t.integer 'owed', :primary_key, null: false, references: :user
-        t.timestamp
-      end
-    end
+    create_tab_table
+    create_user_table
   end
 
   desc 'create sqlite3 db with schmea'

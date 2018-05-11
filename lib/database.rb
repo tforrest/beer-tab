@@ -5,7 +5,7 @@ class DatabaseConnector
   class << self
     def connect
       ActiveRecord::Base.logger = Logger.new('app.log')
-      config = YAML::safe_load(IO.read(database_config_sqlite3))
+      config = YAML.safe_load(IO.read(database_config_sqlite3))
       ActiveRecord::Base.establish_connection(config)
     end
 

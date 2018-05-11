@@ -15,3 +15,6 @@ gem "activerecord", "~> 5.2"
 
 # Added at 2018-05-10 16:02:28 -0700 by thomas:
 gem "sqlite3", "~> 1.3"
+
+# Added at 2018-05-11 08:33:38 -0700 by thomas:
+gem "minitest", "~> 5.11"
