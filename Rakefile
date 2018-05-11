@@ -23,7 +23,7 @@ namespace 'db' do
     create_user_table
   end
 
-  desc 'create sqlite3 db with schmea'
+  desc 'create sqlite3 db with schema'
   task :setup_sqlite3_db do
     Rake::Task['db:connect_sqlite3'].invoke
     Rake::Task['db:create_tables'].invoke

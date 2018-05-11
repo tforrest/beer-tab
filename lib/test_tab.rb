@@ -40,7 +40,7 @@ class TestTab < Minitest::Test
     owes_id = 0
     owed_id = 1
     BeerTab.ensure_tab(owes_id, owed_id)
-    t = Tab.where(['owes = ?  and owed = ?', owes_id, owed_id]).take
+    t = Tab.where(['owes = ?  and owed = ?', owes_id, owed_id]).take!
     assert_equal(t.owes, owes_id)
     assert_equal(t.owed, owed_id)
     assert_equal(0, t.count)
