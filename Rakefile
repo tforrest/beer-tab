@@ -14,13 +14,12 @@ end
 
 namespace 'db' do
   desc 'setup sqlite3 in-memory database'
-  task :setup_sqlite3 do
+  task :connect_sqlite3 do
     ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: 'beerlite')
   end
 
   desc 'create database schema'
   task :create_tables do
-    Rake::Task['db:setup_sqlite3'].invoke
     ActiveRecord::Schema.define do
       create_table :user, force: :cascade do |t|
         t.integer 'telegram_id', :primary_key, null: false
@@ -37,5 +36,11 @@ namespace 'db' do
         t.timestamp
       end
     end
+  end
+
+  desc 'create sqlite3 db with schmea'
+  task :setup_sqlite3_db do
+    Rake::Task['db:connect_sqlite3'].invoke
+    Rake::Task['db:create_tables'].invoke
   end
 end
