@@ -10,10 +10,11 @@ end
 def create_user_table
   ActiveRecord::Schema.define do
     create_table :users, id: false, force: :cascade do |t|
-      t.integer 'telegram_id', primary_key: true, null: false
+      t.integer 'telegram_id', null: false
       t.string 'first_name'
       t.string 'last_name'
       t.string 'username', null: false
+      t.primary_key 'telegram_id'
     end
   end
 end
