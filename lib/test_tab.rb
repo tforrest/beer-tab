@@ -19,7 +19,7 @@ class TestTab < Minitest::Test
   ActiveRecord::Base.establish_connection(adapter: 'sqlite3', database: ':memory:')
   create_user_table
   create_tab_table
-  def after
+  def setup
     Tab.delete_all
     User.delete_all
   end
@@ -54,6 +54,26 @@ class TestTab < Minitest::Test
 
     assert_equal(3, t.count, 'Count of this tab should be 3')
 
+  end
+
+  def test_decrement_tab
+    owes = create_mock_user(2, 'bob', 'bill', 'bb')
+    owed = create_mock_user(3, 'tim', 'tony','tt')
+
+    BeerTab.add_to_tab(owes, owed)
+    BeerTab.add_to_tab(owes, owed)
+    BeerTab.add_to_tab(owes, owed)
+
+    assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return true')
+
+    t = Tab.where(['owes = ?  and owed = ?', owes.id, owed.id]).take!
+
+    assert_equal(2, t.count, 'Count of this tab should be 2')
+
+    assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return true')
+    assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return true')
+    # prevent tab from being negative
+    assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return false')
   end
 
   def create_mock_user(id, first, last, username)
