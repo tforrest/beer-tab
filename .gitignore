@@ -52,3 +52,4 @@ build-iPhoneSimulator/
 .idea/
 
 beerlite
+app.log

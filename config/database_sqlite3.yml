@@ -1,0 +1,4 @@
+adapter: sqlite3
+database: beerlite
+encoding: unicode
+timeout: 5000
