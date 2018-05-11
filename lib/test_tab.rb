@@ -7,12 +7,10 @@ require './models/models'
 # TestTab ensure the database operations are correct
 class TestTab < Minitest::Test
 
-  MockUser = Struct.new(
-      :id,
-      :first_name,
-      :last_name,
-      :username
-  )
+  MockUser = Struct.new(:id,
+                        :first_name,
+                        :last_name,
+                        :username)
   # Create in memory database for testing
   # NEVER use anything else
   # These 3 functions should only run once
@@ -67,13 +65,16 @@ class TestTab < Minitest::Test
     assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return true')
 
     t = Tab.where(['owes = ?  and owed = ?', owes.id, owed.id]).take!
-
     assert_equal(2, t.count, 'Count of this tab should be 2')
 
     assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return true')
     assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return true')
+
     # prevent tab from being negative
-    assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return false')
+    t = Tab.where(['owes = ?  and owed = ?', owes.id, owed.id]).take!
+    assert_equal(0, t.count)
+    assert_equal(false, BeerTab.pay_tab(owes, owed), 'Should return false')
+
   end
 
   def create_mock_user(id, first, last, username)

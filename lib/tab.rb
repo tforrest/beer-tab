@@ -19,7 +19,7 @@ class BeerTab
       tab = ensure_tab(owes.id, owed.id)
 
       if tab.count.zero?
-        false
+        return false
       end
       tab.count -= 1
       tab.save
@@ -27,8 +27,7 @@ class BeerTab
     end
 
     def ensure_tab(owes_id, owed_id)
-      Tab.find_or_create_by!(
-                             owes: owes_id,
+      Tab.find_or_create_by!(owes: owes_id,
                              owed: owed_id)
     end
 
