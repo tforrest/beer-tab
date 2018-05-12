@@ -7,6 +7,7 @@ require './models/models'
 # TestTab ensure the database operations are correct
 class TestTab < Minitest::Test
 
+
   MockUser = Struct.new(:id,
                         :first_name,
                         :last_name,
@@ -71,9 +72,9 @@ class TestTab < Minitest::Test
     assert_equal(true, BeerTab.pay_tab(owes, owed), 'Should return true')
 
     # prevent tab from being negative
+    assert_equal(false, BeerTab.pay_tab(owes, owed), 'Should return false')
     t = Tab.where(['owes = ?  and owed = ?', owes.id, owed.id]).take!
     assert_equal(0, t.count)
-    assert_equal(false, BeerTab.pay_tab(owes, owed), 'Should return false')
 
   end
 
