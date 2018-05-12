@@ -77,6 +77,23 @@ class TestTab < Minitest::Test
 
   end
 
+  def test_owed_sum
+    owes1 = create_mock_user(2, 'bob', 'bill', 'bb')
+    owes2 = create_mock_user(4, 'bob', 'bill', 'bb')
+    owes3 = create_mock_user(5, 'bob', 'bill', 'bb')
+
+    owed = create_mock_user(3, 'tim', 'tony','tt')
+
+    BeerTab.add_to_tab(owes1, owed)
+    BeerTab.add_to_tab(owes1, owed)
+    BeerTab.add_to_tab(owes1, owed)
+    BeerTab.add_to_tab(owes2, owed)
+    BeerTab.add_to_tab(owes3, owed)
+
+    assert_equal(5, BeerTab.show_owed_count(owed.id), 'Owed amount should be 5')
+
+  end
+
   def create_mock_user(id, first, last, username)
     user = MockUser.new
     user.id = id

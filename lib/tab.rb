@@ -26,25 +26,25 @@ class BeerTab
       true
     end
 
-    def ensure_tab(owes_id, owed_id)
-      Tab.find_or_create_by!(owes: owes_id,
-                             owed: owed_id)
-    end
-
-    def show_owed(owed_id)
-      Tab.find_by(owed: owed_id).sum(:count)
-    end
-
-    def show_owes(owes_id)
-      Tab.find_by(owes: owes_id).sum(:count)
-    end
-
     def ensure_user(user)
       User.find_or_create_by!(telegram_id: user.id,
                               first_name: user.first_name,
                               last_name: user.last_name,
                               username: user.username)
-
     end
+
+    def ensure_tab(owes_id, owed_id)
+      Tab.find_or_create_by!(owes: owes_id,
+                             owed: owed_id)
+    end
+
+    def show_owed_count(owed_id)
+      Tab.where([ 'owed = ?', owed_id]).sum('count')
+    end
+
+    def show_owes_count(owes_id)
+      Tab.where([ 'owes = ?', owes_id]).sum('count')
+    end
+
   end
 end
