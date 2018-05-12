@@ -18,9 +18,8 @@ class BeerTab
 
       tab = ensure_tab(owes.id, owed.id)
 
-      if tab.count.zero?
-        return false
-      end
+      return false if tab.count.zero?
+
       tab.count -= 1
       tab.save
       true
