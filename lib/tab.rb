@@ -52,5 +52,9 @@ class BeerTab
     def show_all_owes(owes_id)
       Tab.where(owes: owes_id)
     end
+
+    def show_all_owed(owed_id)
+      Tab.where(owed: owed_id)
+    end
   end
 end
