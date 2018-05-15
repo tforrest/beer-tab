@@ -108,11 +108,13 @@ class TestTab < Minitest::Test
     BeerTab.add_to_tab(owes, owed2)
     BeerTab.add_to_tab(owes, owed2)
     BeerTab.add_to_tab(owes, owed3)
+    BeerTab.add_to_tab(owes, owed3)
 
     q = BeerTab.show_all_owes(4)
     i = 1
     q.each do |tab|
       assert_equal(i, tab.owed)
+      assert_equal(2, tab.count)
       i += 1
     end
 
