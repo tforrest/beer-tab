@@ -97,8 +97,8 @@ class TestTab < Minitest::Test
 
   def test_show_all_owes
     owed1 = create_mock_user(1, 'bob', 'bill', 'bb')
-    owed2 = create_mock_user(2, 'bob', 'bill', 'bb')
-    owed3 = create_mock_user(3, 'bob', 'bill', 'bb')
+    owed2 = create_mock_user(2, 'tim', 'bill', 'tb')
+    owed3 = create_mock_user(3, 'jill', 'bill', 'jb')
 
 
     owes = create_mock_user(4, 'tim', 'tony','tt')
