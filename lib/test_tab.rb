@@ -95,6 +95,29 @@ class TestTab < Minitest::Test
 
   end
 
+  def test_show_all_owes
+    owed1 = create_mock_user(1, 'bob', 'bill', 'bb')
+    owed2 = create_mock_user(2, 'bob', 'bill', 'bb')
+    owed3 = create_mock_user(3, 'bob', 'bill', 'bb')
+
+
+    owes = create_mock_user(4, 'tim', 'tony','tt')
+
+    BeerTab.add_to_tab(owes, owed1)
+    BeerTab.add_to_tab(owes, owed1)
+    BeerTab.add_to_tab(owes, owed2)
+    BeerTab.add_to_tab(owes, owed2)
+    BeerTab.add_to_tab(owes, owed3)
+
+    q = BeerTab.show_all_owes(4)
+    i = 1
+    q.each do |tab|
+      assert_equal(i, tab.owed)
+      i += 1
+    end
+
+  end
+
   def create_mock_user(id, first, last, username)
     user = MockUser.new
     user.id = id

@@ -1,9 +1,11 @@
 require 'active_record'
 
 class User < ActiveRecord::Base
+  has_many :Tab
 end
 
 class Tab < ActiveRecord::Base
+  belongs_to :User
 end
 
 
@@ -24,8 +26,8 @@ def create_tab_table
     create_table :tabs, id: false do |t|
       t.integer 'count', default: 0
       t.integer 'owes', null: false, references: :user
-      t.integer 'owed',  null: false, references: :user
-      t.primary_key 'owes', 'owed'
+      t.integer 'owed', null: false, references: :user
+      t.primary_key 'owed' + 'owes'
       t.timestamp
     end
   end

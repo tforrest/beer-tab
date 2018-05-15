@@ -45,5 +45,12 @@ class BeerTab
       Tab.where([ 'owes = ?', owes_id]).sum('count')
     end
 
+    def show_tab(owed_id, owes_id)
+      Tab.where(['owes = ? and owed = ?', owes_id, owed_id]).take
+    end
+
+    def show_all_owes(owes_id)
+      Tab.where(owes: owes_id)
+    end
   end
 end
