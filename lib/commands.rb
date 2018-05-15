@@ -4,19 +4,21 @@ require './lib/tab'
 # operations for the right command
 class Commands
   class << self
-    def select_operation(message)
+    def execute(message)
       parsed_text_array = parse_message_text(message.text)
       slash_command = parsed_text_array[0]
       args = parsed_text_array[1, -1]
       case slash_command
-      when 'tab'
-        'show tab of user'
-      when 'paid'
-        'remove a beer from your tab'
-      when 'owe'
-        'add a beer for a friend on your tab'
+      when '/tab'
+        'Show tab of user'
+      when '/paid'
+        'Remove a beer from your tab'
+      when '/owe'
+        'Add a beer for a friend on your tab'
+      when '/commands'
+        'Show the list of commands '
       else
-        'error not valid'
+        'Not a valid command :) or an error occurred! Yikes!'
       end
     end
 
